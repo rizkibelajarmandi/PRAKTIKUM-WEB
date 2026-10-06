@@ -12,5 +12,5 @@ try {
 }
 
 // Sesuaikan dengan nama folder Anda di htdocs
-define('BASE_URL', 'TUGASBESOK/ACARA8-fixed/ACARA8/si-akademik8/app/public');
+define('BASE_URL', 'PRAKTIKUM-WEB/ACARA8/si-akademik8/app/public');
 ?>

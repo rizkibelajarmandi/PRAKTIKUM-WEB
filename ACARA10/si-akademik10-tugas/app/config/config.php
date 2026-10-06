@@ -11,5 +11,5 @@ try {
     die("Koneksi database gagal: " . $e->getMessage());
 }
 
-define('BASE_URL', '/PRAKTIKUM-WEB/ACARA9/si-akademik9/app/public');
+define('BASE_URL', '/ACARA10/si-akademik10-tugas/app/public');
 ?>

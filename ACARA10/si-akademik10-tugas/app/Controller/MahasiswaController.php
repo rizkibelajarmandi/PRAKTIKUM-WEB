@@ -1,10 +1,12 @@
 <?php
-// app/Controllers/MahasiswaController.php
+// app/Controller/MahasiswaController.php
+// Controller hanya mengatur alur; semua akses database lewat MahasiswaRepository.
 
+require_once __DIR__ . '/../Core/BaseController.php';
 require_once __DIR__ . '/../Models/Mahasiswa.php';
 require_once __DIR__ . '/../repository/MahasiswaRepository.php';
 
-class MahasiswaController
+class MahasiswaController extends BaseController
 {
     private $repo;
 
@@ -16,17 +18,17 @@ class MahasiswaController
     public function index()
     {
         $mahasiswa = $this->repo->getAll();
-        require_once __DIR__ . '/../Views/mahasiswa/index.php';
+        $this->view('mahasiswa/index', ['mahasiswa' => $mahasiswa]);
     }
 
     public function create()
     {
-        require_once __DIR__ . '/../Views/mahasiswa/create.php';
+        $this->view('mahasiswa/create');
     }
 
     public function store()
     {
-        $mahasiswa = new Mahasiswa('');
+        $mahasiswa = new Mahasiswa();
         $mahasiswa->setNim($_POST['nim']);
         $mahasiswa->setNama($_POST['nama']);
         $mahasiswa->setJurusan($_POST['jurusan']);
@@ -34,9 +36,7 @@ class MahasiswaController
         $mahasiswa->setAngkatan($_POST['angkatan']);
 
         $this->repo->save($mahasiswa);
-
-        header('Location: ' . BASE_URL . '/mahasiswa');
-        exit;
+        $this->redirect('/mahasiswa');
     }
 
     public function detail($nim)
@@ -47,7 +47,7 @@ class MahasiswaController
             echo "Mahasiswa tidak ditemukan";
             return;
         }
-        require_once __DIR__ . '/../Views/mahasiswa/detail.php';
+        $this->view('mahasiswa/detail', ['mahasiswa' => $mahasiswa]);
     }
 
     public function edit($nim)
@@ -58,8 +58,7 @@ class MahasiswaController
             echo "Mahasiswa tidak ditemukan";
             return;
         }
-
-        require_once __DIR__ . '/../Views/mahasiswa/edit.php';
+        $this->view('mahasiswa/edit', ['mahasiswa' => $mahasiswa]);
     }
 
     public function update()
@@ -77,16 +76,12 @@ class MahasiswaController
         $mahasiswa->setAngkatan($_POST['angkatan']);
 
         $this->repo->update($mahasiswa);
-
-        header('Location: ' . BASE_URL . '/mahasiswa');
-        exit;
+        $this->redirect('/mahasiswa');
     }
 
     public function delete($nim)
     {
         $this->repo->delete($nim);
-        header('Location: ' . BASE_URL . '/mahasiswa');
-        exit;
+        $this->redirect('/mahasiswa');
     }
 }
-?>
