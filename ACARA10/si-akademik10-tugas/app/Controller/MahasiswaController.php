@@ -28,7 +28,7 @@ class MahasiswaController extends BaseController
 
     public function store()
     {
-        $mahasiswa = new Mahasiswa();
+        $mahasiswa = new Mahasiswa('');
         $mahasiswa->setNim($_POST['nim']);
         $mahasiswa->setNama($_POST['nama']);
         $mahasiswa->setJurusan($_POST['jurusan']);
