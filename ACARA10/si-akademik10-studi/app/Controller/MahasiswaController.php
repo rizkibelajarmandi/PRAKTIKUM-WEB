@@ -28,8 +28,17 @@ class MahasiswaController extends BaseController
 
     public function store()
     {
+        $nim = $_POST['nim'];
+        if ($this->repo->getByNim($nim)) {
+            $this->view('mahasiswa/create', [
+                'error' => 'NIM sudah terdaftar.',
+                'formData' => $_POST
+            ]);
+            return;
+        }
+
         $mahasiswa = new Mahasiswa($_POST['nim']);
-        $mahasiswa->setNim($_POST['nim']);
+        $mahasiswa->setNim($nim);
         $mahasiswa->setNama($_POST['nama']);
         $mahasiswa->setJurusan($_POST['jurusan']);
         $mahasiswa->setProdiId($_POST['prodi_id']);

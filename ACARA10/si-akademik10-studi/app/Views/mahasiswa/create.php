@@ -13,26 +13,29 @@
 
     <div style="border: 1px solid #ddd; padding: 20px; border-radius: 4px; background: white;">
         <h3>Tambah Mahasiswa</h3>
+        <?php if (!empty($error)): ?>
+            <div class="alert alert-danger" role="alert"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
         <form method="post" action="<?= BASE_URL ?>/mahasiswa/store">
             <div class="mb-3">
                 <label class="form-label">NIM</label>
-                <input type="text" name="nim" class="form-control" required>
+                <input type="text" name="nim" class="form-control" value="<?= htmlspecialchars($formData['nim'] ?? '') ?>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Nama</label>
-                <input type="text" name="nama" class="form-control" required>
+                <input type="text" name="nama" class="form-control" value="<?= htmlspecialchars($formData['nama'] ?? '') ?>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Jurusan</label>
-                <input type="text" name="jurusan" class="form-control" required>
+                <input type="text" name="jurusan" class="form-control" value="<?= htmlspecialchars($formData['jurusan'] ?? '') ?>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Prodi ID</label>
-                <input type="number" name="prodi_id" class="form-control" min="1" required>
+                <input type="number" name="prodi_id" class="form-control" min="1" value="<?= htmlspecialchars($formData['prodi_id'] ?? '') ?>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Angkatan</label>
-                <input type="number" name="angkatan" class="form-control" min="2020" max="2100" required>
+                <input type="number" name="angkatan" class="form-control" min="2020" max="2100" value="<?= htmlspecialchars($formData['angkatan'] ?? '') ?>" required>
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
             <a href="<?= BASE_URL ?>/mahasiswa" class="btn btn-secondary">Batal</a>
