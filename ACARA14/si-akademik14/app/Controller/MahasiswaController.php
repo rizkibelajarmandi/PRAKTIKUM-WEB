@@ -13,90 +13,141 @@ class MahasiswaController extends BaseController
 
     public function index()
     {
-        $mahasiswa = $this->service->getAll();
-        $this->view('mahasiswa/index', ['mahasiswa' => $mahasiswa]);
+        try {
+            $mahasiswa = $this->service->getAll();
+            $this->view('mahasiswa/index', ['mahasiswa' => $mahasiswa]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo "Terjadi kesalahan saat mengambil data mahasiswa.";
+        }
     }
 
     public function create()
     {
-        $this->view('mahasiswa/create');
+        try {
+            $this->view('mahasiswa/create');
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo "Terjadi kesalahan saat membuka form.";
+        }
     }
 
     public function store()
     {
-        $result = $this->service->create($_POST);
+        try {
+            $result = $this->service->create($_POST);
 
-        if ($result['success']) {
-            $_SESSION['flash'] = [
-                'type' => 'success',
-                'message' => 'Data mahasiswa berhasil ditambahkan.'
-            ];
-            $this->redirect('/mahasiswa');
-        } else {
-            // Kembalikan ke form dengan error dan input sebelumnya
-            $this->view('mahasiswa/create', [
-                'errors' => $result['errors'],
-                'old' => $_POST
-            ]);
+            if ($result['success']) {
+                $_SESSION['flash'] = [
+                    'type' => 'success',
+                    'message' => 'Data mahasiswa berhasil ditambahkan.'
+                ];
+
+                $this->redirect('/mahasiswa');
+            } else {
+                $this->view('mahasiswa/create', [
+                    'errors' => $result['errors'],
+                    'old' => $_POST
+                ]);
+            }
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo "Terjadi kesalahan saat menambahkan data mahasiswa.";
         }
     }
 
     public function detail($nim)
     {
-        $mahasiswa = $this->service->getByNim($nim);
-        if (!$mahasiswa) {
-            http_response_code(404);
-            echo "Mahasiswa tidak ditemukan";
-            return;
+        try {
+            $mahasiswa = $this->service->getByNim($nim);
+
+            if (!$mahasiswa) {
+                http_response_code(404);
+                echo "Mahasiswa tidak ditemukan";
+                return;
+            }
+
+            $this->view('mahasiswa/detail', [
+                'mahasiswa' => $mahasiswa
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo "Terjadi kesalahan saat mengambil detail mahasiswa.";
         }
-        $this->view('mahasiswa/detail', ['mahasiswa' => $mahasiswa]);
     }
 
     public function edit($nim)
     {
-        $mahasiswa = $this->service->getByNim($nim);
-        if (!$mahasiswa) {
-            http_response_code(404);
-            echo "Mahasiswa tidak ditemukan";
-            return;
+        try {
+            $mahasiswa = $this->service->getByNim($nim);
+
+            if (!$mahasiswa) {
+                http_response_code(404);
+                echo "Mahasiswa tidak ditemukan";
+                return;
+            }
+
+            $this->view('mahasiswa/edit', [
+                'mahasiswa' => $mahasiswa
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo "Terjadi kesalahan saat membuka form edit.";
         }
-        $this->view('mahasiswa/edit', ['mahasiswa' => $mahasiswa]);
     }
 
     public function update()
     {
-        $result = $this->service->update($_POST);
+        try {
+            $result = $this->service->update($_POST);
 
-        if ($result['success']) {
-            $_SESSION['flash'] = [
-                'type' => 'success',
-                'message' => 'Data mahasiswa berhasil diubah.'
-            ];
-            $this->redirect('/mahasiswa');
-        } else {
-            $mahasiswa = $this->service->getByNim($_POST['nim']);
-            $this->view('mahasiswa/edit', [
-                'mahasiswa' => $mahasiswa,
-                'errors' => $result['errors'],
-                'old' => $_POST
-            ]);
+            if ($result['success']) {
+                $_SESSION['flash'] = [
+                    'type' => 'success',
+                    'message' => 'Data mahasiswa berhasil diubah.'
+                ];
+
+                $this->redirect('/mahasiswa');
+            } else {
+                $mahasiswa = $this->service->getByNim($_POST['nim']);
+
+                $this->view('mahasiswa/edit', [
+                    'mahasiswa' => $mahasiswa,
+                    'errors' => $result['errors'],
+                    'old' => $_POST
+                ]);
+            }
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo "Terjadi kesalahan saat mengubah data mahasiswa.";
         }
     }
 
     public function delete($nim)
     {
-        if ($this->service->delete($nim)) {
-            $_SESSION['flash'] = [
-                'type' => 'success',
-                'message' => 'Data mahasiswa berhasil dihapus.'
-            ];
-        } else {
+        try {
+            if ($this->service->delete($nim)) {
+                $_SESSION['flash'] = [
+                    'type' => 'success',
+                    'message' => 'Data mahasiswa berhasil dihapus.'
+                ];
+            } else {
+                $_SESSION['flash'] = [
+                    'type' => 'danger',
+                    'message' => 'Data gagal dihapus. Silakan coba lagi.'
+                ];
+            }
+
+            $this->redirect('/mahasiswa');
+        } catch (Exception $e) {
             $_SESSION['flash'] = [
                 'type' => 'danger',
-                'message' => 'Data gagal dihapus. Silakan coba lagi.'
+                'message' => 'Terjadi kesalahan saat menghapus data.'
             ];
+
+            $this->redirect('/mahasiswa');
         }
-        $this->redirect('/mahasiswa');
     }
 }
 ?>
+

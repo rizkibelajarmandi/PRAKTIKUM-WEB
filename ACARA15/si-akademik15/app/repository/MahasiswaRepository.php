@@ -1,29 +1,18 @@
 <?php
-
 require_once __DIR__ . '/../Core/BaseModel.php';
 
 class MahasiswaRepository extends BaseModel
 {
-    /**
-     * Mengambil semua data mahasiswa.
-     * Diubah dari getAll() menjadi all().
-     * Menggunakan prepare() untuk memastikan konsistensi penggunaan Prepared Statement.
-     */
-    public function all()
+    public function getAll()
     {
-        $stmt = $this->pdo->prepare(
+        $stmt = $this->pdo->query(
             "SELECT nim, nama, email, jurusan, prodi_id, angkatan, status
              FROM mahasiswa ORDER BY nama ASC"
         );
-        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_CLASS, 'Mahasiswa');
     }
 
-    /**
-     * Mencari data mahasiswa berdasarkan NIM.
-     * Diubah dari getByNim() menjadi find().
-     */
-    public function find($nim)
+    public function getByNim($nim)
     {
         $stmt = $this->pdo->prepare(
             "SELECT nim, nama, email, jurusan, prodi_id, angkatan, status
@@ -34,11 +23,7 @@ class MahasiswaRepository extends BaseModel
         return $stmt->fetch();
     }
 
-    /**
-     * Menyimpan data mahasiswa baru.
-     * Diubah dari save() menjadi create().
-     */
-    public function create($mahasiswa)
+    public function save($mahasiswa)
     {
         $stmt = $this->pdo->prepare(
             "INSERT INTO mahasiswa (nim, nama, email, jurusan, prodi_id, angkatan, status) 
@@ -55,10 +40,6 @@ class MahasiswaRepository extends BaseModel
         ]);
     }
 
-    /**
-     * Memperbarui data mahasiswa.
-     * Nama method tetap update().
-     */
     public function update($mahasiswa)
     {
         $stmt = $this->pdo->prepare(
@@ -78,24 +59,10 @@ class MahasiswaRepository extends BaseModel
         ]);
     }
 
-    
     public function delete($nim)
     {
         $stmt = $this->pdo->prepare("DELETE FROM mahasiswa WHERE nim = :nim");
         return $stmt->execute(['nim' => $nim]);
     }
-
-    /**
-     * Memeriksa apakah data mahasiswa dengan NIM tertentu ada.
-     * Method baru yang ditambahkan sesuai permintaan.
-     * Mengembalikan nilai boolean (true/false).
-     */
-    public function existsByNim($nim)
-    {
-        $stmt = $this->pdo->prepare("SELECT 1 FROM mahasiswa WHERE nim = :nim LIMIT 1");
-        $stmt->execute(['nim' => $nim]);
-        return (bool) $stmt->fetchColumn();
-    }
 }
-
 ?>

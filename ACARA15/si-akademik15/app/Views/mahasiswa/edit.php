@@ -1,0 +1,76 @@
+<?php /** @var Mahasiswa $mahasiswa */ ?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Mahasiswa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h1 class="text-center">POLITEKNIK NEGERI JEMBER</h1>
+    <h2 class="text-center mb-4">Sistem Informasi Akademik</h2>
+
+    <div style="border: 1px solid #ddd; padding: 20px; border-radius: 4px; background: white;">
+        <h3>Edit Mahasiswa</h3>
+
+        <?php if (isset($errors) && count($errors) > 0): ?>
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    <?php foreach ($errors as $error): ?>
+                        <li><?= htmlspecialchars($error) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
+        <form method="post" action="<?= BASE_URL ?>/mahasiswa/update">
+            <input type="hidden" name="nim" value="<?= htmlspecialchars($mahasiswa->getNim()) ?>">
+            
+            <div class="mb-3">
+                <label class="form-label">NIM</label>
+                <input type="text" class="form-control" value="<?= htmlspecialchars($mahasiswa->getNim()) ?>" disabled>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Nama</label>
+                <input type="text" name="nama" class="form-control" value="<?= htmlspecialchars($old['nama'] ?? $mahasiswa->getNama() ?? '') ?>" required>
+            </div>
+            
+            <!-- INI YANG DIPERBAIKI -->
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($old['email'] ?? $mahasiswa->getEmail() ?? '') ?>" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Jurusan</label>
+                <input type="text" name="jurusan" class="form-control" value="<?= htmlspecialchars($old['jurusan'] ?? $mahasiswa->getJurusan() ?? '') ?>" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Prodi ID</label>
+                <input type="number" name="prodi_id" class="form-control" value="<?= htmlspecialchars($old['prodi_id'] ?? $mahasiswa->getProdiId() ?? '') ?>" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Angkatan</label>
+                <input type="number" name="angkatan" class="form-control" value="<?= htmlspecialchars($old['angkatan'] ?? $mahasiswa->getAngkatan() ?? '') ?>" min="2020" max="2100" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Status</label>
+                <select name="status" class="form-control" required>
+                    <option value="aktif" <?= ($old['status'] ?? $mahasiswa->getStatus()) === 'aktif' ? 'selected' : '' ?>>Aktif</option>
+                    <option value="cuti" <?= ($old['status'] ?? $mahasiswa->getStatus()) === 'cuti' ? 'selected' : '' ?>>Cuti</option>
+                    <option value="lulus" <?= ($old['status'] ?? $mahasiswa->getStatus()) === 'lulus' ? 'selected' : '' ?>>Lulus</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="<?= BASE_URL ?>/mahasiswa" class="btn btn-secondary">Batal</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>
