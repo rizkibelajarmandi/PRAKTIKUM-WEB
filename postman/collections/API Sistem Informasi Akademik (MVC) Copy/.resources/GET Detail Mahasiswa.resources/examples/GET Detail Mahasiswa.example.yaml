@@ -1,0 +1,33 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/mahasiswa?id=1"
+  method: GET
+  queryParams:
+    id: "1"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Date: Wed, 11 Nov 2026 17:39:34 GMT
+    Server: Apache/2.4.54 (Win64) OpenSSL/1.1.1q PHP/8.1.10
+    X-Powered-By: PHP/8.1.10
+    Content-Length: "295"
+    Keep-Alive: timeout=5, max=100
+    Connection: Keep-Alive
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "success": true,
+        "message": "Data berhasil diambil",
+        "data": {
+          "id": 1,
+          "nim": "2201001",
+          "nama": "Siti Aminah",
+          "prodi": "Sistem Informasi perubahan",
+          "created_at": "2026-11-11 22:18:05"
+        },
+        "timestamp": "2026-11-11T17:39:34+00:00"
+      }
+order: 1000

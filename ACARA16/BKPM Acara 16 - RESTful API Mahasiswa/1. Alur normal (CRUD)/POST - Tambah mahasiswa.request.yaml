@@ -1,0 +1,26 @@
+$kind: http-request
+description: Menyimpan id hasil insert ke variabel {{id}} untuk request berikutnya.
+url: "{{base_url}}/api/mahasiswa"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "nim": "E41250761",
+      "nama": "Budi Santoso",
+      "email": "budi@example.com",
+      "jurusan": "Teknologi Informasi",
+      "prodi_id": 1,
+      "angkatan": 2025
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status 201", function () { pm.response.to.have.status(201); });
+      const j = pm.response.json();
+      pm.test("success true & ada id", function () { pm.expect(j.success).to.be.true; pm.expect(j.data.id).to.be.a("number"); });
+      pm.collectionVariables.set("id", j.data.id);
+    language: text/javascript
+order: 1000

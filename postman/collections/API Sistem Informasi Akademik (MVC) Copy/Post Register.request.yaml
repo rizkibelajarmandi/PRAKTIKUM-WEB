@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{base_url}}/mahasiswa"
+method: POST
+body:
+  type: json
+  content: '{"nim":"2201003","nama":"Davi Ramadhana","prodi":"Informatika"}'
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_16rd}}"
+examples: .resources/Post Register.resources/examples
+order: 3000

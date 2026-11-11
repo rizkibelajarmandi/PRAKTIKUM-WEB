@@ -1,0 +1,4 @@
+name: LOCAL
+values:
+  - key: base_url
+    value: ''

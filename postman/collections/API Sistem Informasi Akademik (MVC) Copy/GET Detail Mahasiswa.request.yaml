@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{base_url}}/mahasiswa?id=1"
+method: GET
+queryParams:
+  id: "1"
+examples: .resources/GET Detail Mahasiswa.resources/examples
+order: 2000

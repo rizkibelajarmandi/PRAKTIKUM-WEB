@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{base_url}}/mahasiswa/?id=7"
+method: PUT
+queryParams:
+  id: "7"
+body:
+  type: json
+  content: '{"nim":"2201002","nama":"Rozi Al Fateh","prodi":"Sistem Informasi perubahan"}'
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_16rd}}"
+examples: .resources/PUT Mahasiswa.resources/examples
+order: 4000

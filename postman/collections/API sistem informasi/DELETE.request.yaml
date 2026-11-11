@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{base_url}}/mahasiswa/?id=7"
+method: DELETE
+queryParams:
+  id: "7"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_16rd}}"
+examples: .resources/DELETE.resources/examples
+order: 7000

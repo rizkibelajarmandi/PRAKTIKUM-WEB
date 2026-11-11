@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{base_url}}/login"
+method: POST
+body:
+  type: json
+  content: '{"username":"Rozi Fateh","password":"rozi123"}'
+examples: .resources/LOGIN.resources/examples
+order: 6000

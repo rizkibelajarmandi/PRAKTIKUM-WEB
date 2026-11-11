@@ -1,0 +1,22 @@
+$kind: http-request
+description: Jalankan setelah ada mahasiswa dengan NIM E41250750, atau ganti NIM dengan yang sudah ada di database.
+url: "{{base_url}}/api/mahasiswa"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "nim": "E41250750",
+      "nama": "Budi Santoso",
+      "email": "budi@example.com",
+      "jurusan": "Teknologi Informasi",
+      "prodi_id": 1,
+      "angkatan": 2025
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test("Status 409", function () { pm.response.to.have.status(409); });
+    language: text/javascript
+order: 9000

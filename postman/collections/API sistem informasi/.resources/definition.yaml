@@ -1,0 +1,6 @@
+$kind: collection
+name: API Sistem Informasi Akademik (MVC)
+variables:
+  - key: json_web_token_16rd
+    secret: true
+    disabled: false

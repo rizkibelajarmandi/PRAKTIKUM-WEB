@@ -1,0 +1,30 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/mahasiswa"
+  method: POST
+  body:
+    type: json
+    content: '{"nim":"2201003","nama":"Davi Ramadhana","prodi":"Informatika"}'
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Date: Wed, 11 Nov 2026 17:41:46 GMT
+    Server: Apache/2.4.54 (Win64) OpenSSL/1.1.1q PHP/8.1.10
+    X-Powered-By: PHP/8.1.10
+    Content-Length: "152"
+    Keep-Alive: timeout=5, max=100
+    Connection: Keep-Alive
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "success": true,
+        "message": "Data berhasil ditambahkan",
+        "data": {
+          "id": "8"
+        },
+        "timestamp": "2026-11-11T17:41:46+00:00"
+      }
+order: 1000
