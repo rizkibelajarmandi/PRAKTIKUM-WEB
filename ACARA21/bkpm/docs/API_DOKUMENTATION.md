@@ -266,9 +266,3 @@ Kredensial yang salah menghasilkan `401 Unauthorized`.
 | `409 Conflict` | Username atau email sudah terdaftar |
 | `500 Internal Server Error` | Terjadi kesalahan server |
 
-## Catatan metode
-
-Gunakan `POST` untuk `/register` dan `/login`. Implementasi router saat ini
-meneruskan path tersebut ke handler autentikasi tanpa memeriksa metode HTTP.
-Untuk endpoint `/mahasiswa`, metode yang didukung adalah `GET`, `POST`, `PUT`,
-dan `DELETE`.
