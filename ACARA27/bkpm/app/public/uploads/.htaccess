@@ -1,0 +1,5 @@
+# Acara 26: folder ini hanya untuk gambar.
+# Blokir akses/eksekusi skrip supaya berkas berbahaya yang lolos upload tidak bisa dijalankan.
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phps|phar|pht)$">
+    Require all denied
+</FilesMatch>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 360px; margin: 4rem auto; padding: 0 1rem; }
+        label { display: block; margin-top: 1rem; }
+        input { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { margin-top: 1.5rem; padding: 8px 16px; cursor: pointer; }
+        #pesan { margin-top: 1rem; color: #b00020; min-height: 1.2em; }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="form-login">
+        <label for="username">Username</label>
+        <input type="text" id="username" required autocomplete="username">
+        <label for="password">Password</label>
+        <input type="password" id="password" required autocomplete="current-password">
+        <button type="submit">Masuk</button>
+    </form>
+    <p id="pesan"></p>
+    <p><a href="index.html">Lihat data tanpa login</a></p>
+    <script src="login.js"></script>
+</body>
+</html>

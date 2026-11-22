@@ -25,6 +25,11 @@ class MahasiswaController
         ) {
             Response::json(400, false, 'Field nim, nama, dan prodi wajib diisi');
         }
+        if (strlen($data['nim']) !== 9) {
+            Response::json(422, false, 'Format NIM tidak valid, harus 9 digit');
+        }
+
+
         $id = $this->model->create($data);
         Response::json(201, true, 'Data berhasil ditambahkan', ['id' =>
         $id]);

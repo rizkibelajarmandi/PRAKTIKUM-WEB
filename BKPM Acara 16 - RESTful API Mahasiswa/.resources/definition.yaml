@@ -1,0 +1,5 @@
+$kind: collection
+description: ""
+variables:
+  base_url: http://localhost/PRAKTIKUM-WEB/ACARA16/si-akademik16/app/public
+  id: "1"

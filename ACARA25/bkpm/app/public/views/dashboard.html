@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - Data Mahasiswa</title>
+    <!-- Penjaga halaman: jalan sebelum halaman digambar. Tanpa token -> ke login -->
+    <script>
+        if (!localStorage.getItem('token')) { window.location.replace('login.html'); }
+    </script>
+    <style>
+        [hidden] { display: none !important; }
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 1.5rem auto; padding: 0 1rem; }
+        header { display: flex; justify-content: space-between; align-items: center; }
+        header div { display: flex; gap: 12px; align-items: center; }
+        .kartu { border: 1px solid #ccc; border-radius: 8px; padding: 12px 20px; display: inline-block; margin: 1rem 0; }
+        .kartu strong { display: block; font-size: 2rem; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+        th { background: #f0f0f0; }
+        #status { min-height: 1.2em; font-style: italic; }
+        #status.error { color: #b00020; }
+        #status.ok { color: #0a7a2f; }
+        #status.loading { color: #0b5ed7; }
+        #panel-admin { border: 1px solid #ccc; border-radius: 8px; padding: 0 16px 16px; margin-bottom: 1rem; }
+        form input { padding: 6px; margin-right: 8px; }
+        button { cursor: pointer; padding: 6px 12px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dashboard</h1>
+        <div>
+            <span id="info-role"></span>
+            <button id="btn-logout" type="button">Logout</button>
+        </div>
+    </header>
+
+    <div class="kartu">Total Mahasiswa <strong id="total">0</strong></div>
+    <p id="status"></p>
+
+    <!-- Hanya tampil untuk role admin -->
+    <section id="panel-admin" hidden>
+        <h2 id="judul-form">Tambah Mahasiswa</h2>
+        <form id="form-mahasiswa">
+            <input type="text" id="nim" placeholder="NIM" required>
+            <input type="text" id="nama" placeholder="Nama" required>
+            <input type="text" id="prodi" placeholder="Program Studi" required>
+            <button type="submit">Simpan</button>
+            <button type="button" id="btn-batal" hidden>Batal</button>
+        </form>
+    </section>
+
+    <table id="tabel-mahasiswa">
+        <thead>
+            <tr><th>NIM</th><th>Nama</th><th>Program Studi</th><th id="kolom-aksi" hidden>Aksi</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

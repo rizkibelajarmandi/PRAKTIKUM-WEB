@@ -9,8 +9,7 @@ class User
     public function create(array $data): string
     {
         $stmt = $this->db->prepare(
-            'INSERT INTO users (username, email, password) VALUES (:u, :e,
-:p)'
+            'INSERT INTO users (username, email, password) VALUES (:u, :e, :p)'
         );
         $stmt->execute([
             ':u' => $data['username'],
@@ -21,8 +20,7 @@ class User
     }
     public function findByUsername(string $username)
     {
-        $stmt = $this->db->prepare('SELECT * FROM users WHERE username =
-:u');
+        $stmt = $this->db->prepare('SELECT * FROM users WHERE username = :u');
         $stmt->execute([':u' => $username]);
         return $stmt->fetch();
     }

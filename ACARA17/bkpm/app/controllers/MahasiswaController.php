@@ -28,8 +28,7 @@ class MahasiswaController
         $data = json_decode(file_get_contents('php://input'), true);
         if (empty($data['nim']) || empty($data['nama']) || empty($data['prodi'])) {
             http_response_code(400);
-            echo json_encode(['success' => false, 'message' => 'Field nim, nama, dan prodi
-wajib diisi']);
+            echo json_encode(['success' => false, 'message' => 'Field nim, nama, dan prodi wajib diisi']);
             exit;
         }
         $id = $this->model->create($data);

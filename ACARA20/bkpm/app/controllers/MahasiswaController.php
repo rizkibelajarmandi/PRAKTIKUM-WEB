@@ -65,3 +65,4 @@ class MahasiswaController
         Response::json(200, true, 'Data berhasil dihapus');
     }
 }
+

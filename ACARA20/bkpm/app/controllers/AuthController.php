@@ -13,8 +13,7 @@ class AuthController
             empty($data['username']) || empty($data['email']) ||
             empty($data['password'])
         ) {
-            Response::json(400, false, 'Username, email, dan password wajib
-diisi');
+            Response::json(400, false, 'Username, email, dan password wajib diisi');
         }
         $data['password'] = password_hash(
             $data['password'],

@@ -32,7 +32,7 @@ class Router
         // Penanganan khusus: register bukan resource CRUD biasa
         if ($resource === 'register') {
             $controller->register();
-            return;
+            return; 
         }
 
         switch ($_SERVER['REQUEST_METHOD']) {

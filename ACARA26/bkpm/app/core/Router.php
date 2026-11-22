@@ -1,0 +1,63 @@
+<?php
+class Router
+{
+    // Peta sederhana: nama resource pada URL => nama class Controller
+    private array $map = [
+        'mahasiswa' => 'MahasiswaController',
+        'register'  => 'AuthController',
+        'login' => 'AuthController', //tambahan resource login
+    ];
+
+
+    public function dispatch(): void
+    {
+        $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+        $segments = explode('/', $uri);
+        $resource = end($segments) ?: 'mahasiswa';
+
+        $controllerName = $this->map[$resource] ?? null;
+        if (!$controllerName) {
+            Response::json(404, false, 'Endpoint tidak ditemukan');
+            exit;
+        }
+
+        $controller = new $controllerName();
+
+        // di dalam dispatch(), sebelum blok register:
+        if ($resource === 'login') {
+            $controller->login();
+            return;
+        }
+
+        // Penanganan khusus: register bukan resource CRUD biasa
+        if ($resource === 'register') {
+            $controller->register();
+            return;
+        }
+
+        // Acara 26: PHP hanya mengisi $_POST/$_FILES untuk request POST, tidak untuk PUT.
+        // Agar update bisa membawa berkas, client mengirim POST dengan ?_method=PUT.
+        $method = $_SERVER['REQUEST_METHOD'];
+        if ($method === 'POST' && strtoupper($_GET['_method'] ?? '') === 'PUT') {
+            $method = 'PUT';
+        }
+
+        switch ($method) {
+            case 'GET':
+                $controller->index();
+                break;
+            case 'POST':
+                $controller->store();
+                break;
+            case 'PUT':
+                $controller->update($_GET['id'] ?? null);
+                break;
+            case 'DELETE':
+                $controller->destroy($_GET['id'] ?? null);
+                break;
+            default:
+                Response::json(405, false, 'Method tidak diizinkan');
+                exit;
+        }
+    }
+}
