@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - Data Mahasiswa</title>
+    <link rel="stylesheet" href="assets/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <nav class="navbar bg-dark navbar-dark px-3">
+        <span class="navbar-brand mb-0 h1">Dashboard Mahasiswa</span>
+        <div class="d-flex align-items-center gap-2">
+            <span id="info-role" class="badge text-bg-secondary"></span>
+            <button id="btn-logout" type="button" class="btn btn-outline-light btn-sm">Logout</button>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        <div class="row g-3 mb-3">
+            <div class="col-sm-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="text-muted small">Total Mahasiswa</div>
+                        <div class="fs-2 fw-bold" id="total">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h2 class="h5 mb-0">Data Mahasiswa</h2>
+            <a id="btn-tambah" href="form_tambah.html" class="btn btn-primary btn-sm" hidden>+ Tambah Mahasiswa</a>
+        </div>
+        <p id="status" class="text-muted fst-italic" aria-live="polite"></p>
+
+        <div class="table-responsive bg-white">
+            <table id="tabel-mahasiswa" class="table table-bordered table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>NIM</th><th>Nama</th><th>Program Studi</th><th>Foto</th>
+                        <th id="kolom-aksi" hidden>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="common.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

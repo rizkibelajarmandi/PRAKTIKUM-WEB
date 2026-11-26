@@ -1,0 +1,118 @@
+
+openapi: 3.0.0
+
+info:
+  title: API Sistem Informasi Akademik (MVC)
+  version: 1.0.0
+
+servers:
+  - url: http://localhost/sistem-informasi-akademik/public
+
+paths:
+  /login:
+    post:
+      summary: Autentikasi pengguna (AuthController::login)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Login berhasil
+        "401":
+          description: Kredensial tidak valid
+
+  /register:
+    post:
+      summary: Registrasi pengguna (AuthController::register)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "201":
+          description: Registrasi berhasil
+        "400":
+          description: Data registrasi tidak valid
+
+  /mahasiswa:
+    get:
+      summary: Mengambil data mahasiswa (MahasiswaController::index)
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Data berhasil diambil
+
+    post:
+      summary: Menambahkan data mahasiswa (MahasiswaController::store)
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Data berhasil ditambahkan
+
+    put:
+      summary: Memperbarui data mahasiswa (MahasiswaController::update)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nama:
+                  type: string
+                nim:
+                  type: string
+                prodi:
+                  type: string
+      responses:
+        "200":
+          description: Data berhasil diperbarui
+        "404":
+          description: Data mahasiswa tidak ditemukan
+
+    delete:
+      summary: Menghapus data mahasiswa (MahasiswaController::destroy)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Data berhasil dihapus
+        "404":
+          description: Data mahasiswa tidak ditemukan
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

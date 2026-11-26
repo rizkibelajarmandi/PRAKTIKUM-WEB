@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ubah Mahasiswa</title>
+    <link rel="stylesheet" href="assets/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <main class="container py-4" style="max-width: 560px;">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h1 class="h4 mb-3">Ubah Mahasiswa</h1>
+                <p id="status-muat" class="text-primary fst-italic" aria-live="polite">Memuat data...</p>
+                <form id="form-mahasiswa" novalidate>
+                    <div class="mb-3">
+                        <label for="nim" class="form-label">NIM</label>
+                        <input type="text" id="nim" class="form-control" autocomplete="off">
+                        <div id="err-nim" class="invalid-feedback"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nama" class="form-label">Nama</label>
+                        <input type="text" id="nama" class="form-control" autocomplete="off">
+                        <div id="err-nama" class="invalid-feedback"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prodi" class="form-label">Program Studi</label>
+                        <input type="text" id="prodi" class="form-control" autocomplete="off">
+                        <div id="err-prodi" class="invalid-feedback"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="foto" class="form-label">Foto</label>
+                        <div id="foto-sekarang" class="mb-2"></div>
+                        <input type="file" id="foto" class="form-control" accept="image/png,image/jpeg">
+                        <div class="form-text">Kosongkan jika tidak ingin mengganti foto. JPG/PNG, maksimal 2MB.</div>
+                        <div id="err-foto" class="invalid-feedback"></div>
+                    </div>
+                    <button type="submit" id="btn-simpan" class="btn btn-primary">Simpan Perubahan</button>
+                    <a href="dashboard.html" class="btn btn-outline-secondary">Batal</a>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="config.js"></script>
+    <script src="common.js"></script>
+    <script src="form_edit.js"></script>
+</body>
+</html>

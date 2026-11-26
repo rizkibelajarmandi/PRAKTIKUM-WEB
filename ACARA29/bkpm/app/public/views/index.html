@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Mahasiswa</title>
+    <link rel="stylesheet" href="assets/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <main class="container py-4" style="max-width: 900px;">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="h3 mb-0">Data Mahasiswa</h1>
+            <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+        </div>
+        <p class="text-muted">Data diambil dari REST API melalui Fetch API.</p>
+        <p id="status" class="text-muted fst-italic" aria-live="polite"></p>
+        <div class="table-responsive bg-white">
+            <table id="tabel-mahasiswa" class="table table-bordered align-middle mb-0">
+                <thead class="table-light">
+                    <tr><th>NIM</th><th>Nama</th><th>Program Studi</th><th>Foto</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+    <script src="config.js"></script>
+    <script src="common.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
