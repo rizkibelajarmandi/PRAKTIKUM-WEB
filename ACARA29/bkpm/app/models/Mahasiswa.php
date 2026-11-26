@@ -58,7 +58,7 @@ class Mahasiswa
             ':nama' => $data['nama'],
             ':prodi' => $data['prodi'],
             ':id' => $id
-        ]);
+        ]); 
     }
     public function delete(int $id): void
     {
